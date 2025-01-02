@@ -1,0 +1,36 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "@headlessui/react": "^1.4.2",
+        "@inertiajs/react": "^1.3.0",
+        "@tailwindcss/forms": "^0.5.3",
+        "@vitejs/plugin-react": "^4.2.0",
+        "autoprefixer": "^10.4.12",
+        "axios": "^1.7.9",
+        "laravel-vite-plugin": "^0.7.2",
+        "postcss": "^8.4.31",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "tailwindcss": "^3.2.1",
+        "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^6.7.2",
+        "@fortawesome/fontawesome-svg-core": "^6.7.2",
+        "@fortawesome/free-solid-svg-icons": "^6.7.2",
+        "@fortawesome/react-fontawesome": "^0.2.2",
+        "@inertiajs/inertia": "^0.11.1",
+        "daisyui": "^4.12.22",
+        "date-fns": "^4.1.0",
+        "leaflet": "^1.9.4",
+        "qrcode.react": "^4.2.0",
+        "react-leaflet": "^4.2.1",
+        "react-quill": "^2.0.0",
+        "sweetalert2": "^11.15.3",
+        "swiper": "^11.1.15"
+    }
+}

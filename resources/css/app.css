@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hamburger-line {
+    @apply w-[30px] h-[2px] my-2 block bg-black;
+}
+
+/* Animasi untuk garis pertama */
+.hamburger-active > span:nth-child(1) {
+    @apply origin-top-left rotate-45;
+}
+
+.btn-home-hijau {
+    @apply py-2 px-5 bg-hijau1 text-white font-semibold rounded-full border border-hijau1 hover:bg-white hover:text-hijau1 capitalize transition-all duration-300;
+}
+
+.btn-home-putih {
+    @apply py-2 px-5 bg-transparent text-hijau1 font-semibold rounded-full border border-hijau1 hover:bg-hijau1 hover:text-white capitalize transition-all duration-300;
+}
