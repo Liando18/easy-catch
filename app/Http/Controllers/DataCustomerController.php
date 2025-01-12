@@ -90,11 +90,7 @@ class DataCustomerController extends Controller
         $account->save();
 
         if ($request->hasFile('foto')) {
-            if ($customer->foto && file_exists(public_path('img/user/' . $customer->foto))) {
-                unlink(public_path('img/user/' . $customer->foto));
-            }
-
-            $fileName = $request->file('foto')->getClientOriginalName();
+            $fileName = time() . "_" . $request->file('foto')->getClientOriginalName();
 
             $request->file('foto')->move(public_path('img/user/'), $fileName);
 

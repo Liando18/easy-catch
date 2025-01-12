@@ -126,7 +126,6 @@ const Pesanan = () => {
                                             <th>Jumlah Beli</th>
                                             <th>Ongkir</th>
                                             <th>Total Harga</th>
-                                            <th>Pengiriman</th>
                                             <th>Status Pengirman</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -144,13 +143,6 @@ const Pesanan = () => {
                                                     {formatRupiah(
                                                         row.totalPrice
                                                     )}
-                                                </td>
-                                                <td>
-                                                    {row.pengiriman == "1"
-                                                        ? "Drone"
-                                                        : row.pengiriman == "2"
-                                                        ? "Motor"
-                                                        : "Mobil"}
                                                 </td>
                                                 <td
                                                     className={`font-bold ${
@@ -170,21 +162,11 @@ const Pesanan = () => {
                                                         : "Dibatalkan"}
                                                 </td>
                                                 <td>
-                                                    {row.status == "2" && (
-                                                        <button
-                                                            onClick={() =>
-                                                                rowCart(row)
-                                                            }
-                                                            className="btn btn-success text-white btn-xs mb-2 md:me-1"
-                                                        >
-                                                            Konfirmasi Pesanan
-                                                        </button>
-                                                    )}
                                                     <a
                                                         href={`/shop/pengiriman/${row.id}/view`}
-                                                        className="btn btn-info text-white btn-xs mb-2 md:me-1"
+                                                        className="btn btn-info text-white mb-2 md:me-1"
                                                     >
-                                                        View Produk
+                                                        View Pesanan
                                                     </a>
                                                 </td>
                                             </tr>

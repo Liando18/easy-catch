@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('account_id')->constrained('account', 'id')->cascadeOnDelete();
             $table->string('nama', 50);
-            $table->enum('jabatan', ['1', '2']);
+            $table->enum('jabatan', ['1', '2', '3']);
             $table->timestamps();
         });
     }

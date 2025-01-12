@@ -50,9 +50,18 @@ const ProductView = () => {
                             </div>
 
                             <div className="w-full md:w-1/2 px-4 bg-white rounded-xl py-4">
-                                <h2 className="text-3xl font-bold mb-4">
-                                    {data_product.nama}
-                                </h2>
+                                <div className="mb-5">
+                                    <h2 className="text-3xl font-bold">
+                                        {data_product.nama}
+                                    </h2>
+                                    <a
+                                        href={`/shop/store/${data_product.store.id}`}
+                                        className="text-lg hover:text-hijau1"
+                                    >
+                                        {data_product.store.nama}
+                                    </a>
+                                </div>
+
                                 <a
                                     href={`/shop/category/${data_product.category.id}`}
                                     className="text-teal-600 mb-4 border border-teal-600 px-4 py-2 rounded-lg"
@@ -60,16 +69,16 @@ const ProductView = () => {
                                     {data_product.category.nama}
                                 </a>
 
-                                <div className="mb-2 mt-10">
+                                <div className="mb-2 mt-7">
                                     <span className="text-xl font-bold mr-2">
                                         {formatRupiah(data_product.harga)}
                                     </span>
-                                    <span className="text-gray-500 line-through">
+                                    {/* <span className="text-gray-500 line-through">
                                         {formatRupiah(
                                             data_product.harga +
                                                 data_product.harga * 0.1
                                         )}
-                                    </span>
+                                    </span> */}
                                 </div>
                                 <p className="text-gray-900 mb-4">
                                     Stok : {data_product.stok} (

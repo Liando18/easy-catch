@@ -72,7 +72,7 @@ class ShopController extends Controller
 
     public function productView($id)
     {
-        $data_product = Product::with(['category'])->where('id', '=', $id)->first();
+        $data_product = Product::with(['category', 'store'])->where('id', '=', $id)->first();
 
         return Inertia::render('Shop/ProductView', [
             'data_product' => $data_product

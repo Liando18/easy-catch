@@ -32,7 +32,7 @@ export default function SignIn({ status }) {
                     {status}
                 </div>
             )}
-            <div className="bg-gray-100 flex items-center justify-center px-2 py-10 md:py-36">
+            <div className="bg-gray-100 flex items-center justify-center px-2 py-10 md:py-28">
                 <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
                     <h2 className="text-2xl font-bold text-gray-800 mb-6">
                         Sign In to EasyCacth

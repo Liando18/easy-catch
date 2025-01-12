@@ -51,6 +51,7 @@ class MerchantController extends Controller
             'merchant_id' => 'required',
             'nama' => 'required|unique:' . Store::class,
             'deskripsi' => 'required',
+            'pembayaran' => 'required',
             'qris' => 'required',
             'foto' => 'required|image|mimes:jpeg,png,jpg|max:1024',
             'alamat' => 'required',
@@ -61,6 +62,7 @@ class MerchantController extends Controller
             'nama.unique' => 'Nama sudah terdaftar',
             'nama.required' => 'Nama harus di isi',
             'deskripsi.required' => 'Deskripsi harus di isi',
+            'pembayaran.required' => 'Nama media pembayaran harus di isi',
             'qris.required' => 'Nomor Rekening harus di isi',
             'foto.image' => 'File yang diupload harus berupa gambar',
             'foto.mimes' => 'Format foto yang diizinkan adalah jpeg, png, jpg',
@@ -74,7 +76,7 @@ class MerchantController extends Controller
             unlink(public_path('img/store/' . $request->foto));
         }
 
-        $fileName = $request->nama . "-" . $request->file('foto')->getClientOriginalName();
+        $fileName = time() . "_" . $request->nama . "-" . $request->file('foto')->getClientOriginalName();
         $request->file('foto')->move(public_path('img/store/'), $fileName);
 
         Account::findOrFail($request->account_id)->update([
@@ -90,6 +92,7 @@ class MerchantController extends Controller
             'merchant_id' => $request->merchant_id,
             'nama' => $request->nama,
             'deskripsi' => $request->deskripsi,
+            'pembayaran' => $request->pembayaran,
             'qris' => $request->qris,
             'foto' => $fileName,
             'alamat' => $request->alamat,
@@ -105,6 +108,7 @@ class MerchantController extends Controller
         $request->validate([
             'nama' => 'required|unique:store,nama,' . $id,
             'deskripsi' => 'required',
+            'pembayaran' => 'required',
             'qris' => 'required',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:5090',
             'alamat' => 'required',
@@ -114,6 +118,7 @@ class MerchantController extends Controller
             'nama.unique' => 'Nama sudah terdaftar',
             'nama.required' => 'Nama harus di isi',
             'deskripsi.required' => 'Deskripsi harus di isi',
+            'pembayaran.required' => 'Nama media pembayaran harus di isi',
             'foto.image' => 'File yang diupload harus berupa gambar',
             'foto.mimes' => 'Format foto yang diizinkan adalah jpeg, png, jpg',
             'foto.max' => 'Ukuran foto maksimal 5MB',
@@ -137,6 +142,7 @@ class MerchantController extends Controller
 
         $store->nama = $request->nama;
         $store->deskripsi = $request->deskripsi;
+        $store->pembayaran = $request->pembayaran;
         $store->qris = $request->qris;
         $store->alamat = $request->alamat;
         $store->long = $request->long;

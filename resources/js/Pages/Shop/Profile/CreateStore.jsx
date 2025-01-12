@@ -1,6 +1,16 @@
 import UserLayout from "@/Layouts/UserLayout";
 import { useForm, usePage } from "@inertiajs/react";
 import ReactQuill from "react-quill";
+import { QRCodeCanvas } from "qrcode.react";
+import { useState } from "react";
+import {
+    MapContainer,
+    TileLayer,
+    useMap,
+    Marker,
+    Popup,
+    useMapEvents,
+} from "react-leaflet";
 import Swal from "sweetalert2";
 
 const CreateStore = () => {
@@ -11,9 +21,49 @@ const CreateStore = () => {
         account_id: auth.user.id,
         nama: "",
         deskripsi: "",
+        pembayaran: "",
         qris: "",
         foto: null,
     });
+
+    const [fotoPreview, setFotoPreview] = useState(null);
+
+    const MapClickHandler = () => {
+        useMapEvents({
+            click(e) {
+                const { lat, lng } = e.latlng;
+                setData("let", lat);
+                setData("long", lng);
+            },
+        });
+        console.log("Long :", data.long, "Let :", data.let);
+        return null;
+    };
+
+    const handleDownload = () => {
+        const canvas = document.getElementById("qr-code");
+        const imageUrl = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
+        link.href = imageUrl;
+        link.download = data.nama + "-Qris.png";
+        link.click();
+    };
+
+    const handleFileChange = (e, index) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        setData(`foto`, file);
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setFotoPreview((prev) => ({
+                ...prev,
+                [index]: reader.result,
+            }));
+        };
+        reader.readAsDataURL(file);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -23,6 +73,7 @@ const CreateStore = () => {
         formData.append("merchant_id", data.merchant_id);
         formData.append("nama", data.nama);
         formData.append("deskripsi", data.deskripsi);
+        formData.append("pembayaran", data.pembayaran);
         formData.append("qris", data.qris);
         if (data.foto) formData.append("foto", data.foto);
 
@@ -124,6 +175,25 @@ const CreateStore = () => {
                             htmlFor="website-admin"
                             className="block mb-2 text-sm font-medium text-gray-900"
                         >
+                            Nama Bank atau Media Pembayaran Lainnya
+                        </label>
+                        <input
+                            type="text"
+                            name="pembayaran"
+                            value={data.pembayaran}
+                            onChange={(e) =>
+                                setData("pembayaran", e.target.value)
+                            }
+                            placeholder="Masukan Nama Media Pembayaran (Misalnya: Bank BRI atau Dana)"
+                            className="input input-bordered w-full max-w-full"
+                            required
+                        />
+                    </div>
+                    <div className="mb-5">
+                        <label
+                            htmlFor="website-admin"
+                            className="block mb-2 text-sm font-medium text-gray-900"
+                        >
                             Nomor Rekening atau via pembayaran Toko Anda
                         </label>
                         <input
@@ -136,19 +206,82 @@ const CreateStore = () => {
                             required
                         />
                     </div>
+                    {/* Menampilkan QR Code berdasarkan nomor pembayaran */}
+                    {data.qris && (
+                        <div className="mb-5">
+                            <label
+                                htmlFor="website-admin"
+                                className="block mb-2 text-sm font-medium text-gray-900"
+                            >
+                                QRIS Code untuk Pembayaran Toko Anda
+                            </label>
+                            <QRCodeCanvas
+                                id="qr-code"
+                                value={data.qris}
+                                size={200}
+                                fgColor="#000000"
+                                bgColor="#ffffff"
+                            />
+                            <button
+                                type="button"
+                                onClick={handleDownload}
+                                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg"
+                            >
+                                Simpan QR Code
+                            </button>
+                        </div>
+                    )}
                     <div className="mb-5">
                         <label
                             htmlFor="website-admin"
                             className="block mb-2 text-sm font-medium text-gray-900"
                         >
-                            Upload Foto Brand Toko Anda
+                            Alamat Toko Anda
+                        </label>
+                        <textarea
+                            className="textarea textarea-bordered w-full"
+                            onChange={(e) => setData("alamat", e.target.value)}
+                            placeholder="Isikan alamat toko anda"
+                        >
+                            {data.alamat}
+                        </textarea>
+                    </div>
+                    <div className="mb-5">
+                        <label
+                            htmlFor="website-admin"
+                            className="block mb-2 text-sm font-medium text-gray-900"
+                        >
+                            Koordinat Toko Anda
+                        </label>
+                        <MapContainer
+                            center={[-1.347515294868882, 100.57450092175624]}
+                            zoom={15}
+                            scrollWheelZoom={false}
+                            className="w-full h-96 z-0"
+                        >
+                            <TileLayer
+                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            />
+                            <MapClickHandler />
+                            {data.let && data.long && (
+                                <Marker position={[data.let, data.long]} />
+                            )}
+                        </MapContainer>
+                    </div>
+
+                    <div className="mb-5">
+                        <label
+                            htmlFor="website-admin"
+                            className="block mb-2 text-sm font-medium text-gray-900"
+                        >
+                            Upload jika ingin merubah foto Brand Toko Anda
                         </label>
                         <input
                             type="file"
                             name="foto"
                             onChange={(e) => setData("foto", e.target.files[0])}
                             className="file-input file-input-bordered file-input-accent w-full max-w-full"
-                            required
                         />
                     </div>
                     <button

@@ -40,6 +40,12 @@ class AccountSeeder extends Seeder
                 'password' => Hash::make('123'),
                 'role' => '4'
             ],
+            [
+                'id' => Str::uuid(),
+                'email' => 'distributor@gmail.com',
+                'password' => Hash::make('123'),
+                'role' => '5'
+            ],
         ];
 
         Account::insert($data);

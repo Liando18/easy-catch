@@ -42,15 +42,16 @@ class CheckoutController extends Controller
 
     public function order(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'alamat' => 'required',
             'lat' => 'required',
             'long' => 'required',
+            'nama' => 'required'
         ], [
             'alamat.required' => 'Alamat anda belum lengkap, mohon lengkapi terlebih dahulu',
             'lat.required' => 'Pilih titik koordinat anda pada peta',
             'long.required' => 'Pilih titik koordinat anda pada peta',
+            'nama.required' => 'Nama penerima mohon di isi'
         ]);
 
         try {
@@ -62,10 +63,12 @@ class CheckoutController extends Controller
                 })
                 ->get();
 
+            $alamat = $request->alamat . " (Nama penerima : $request->nama)";
+
             $order = Order::create([
                 'id' => Str::uuid(),
                 'customer_id' => $customer_id,
-                'alamat' => $request->alamat,
+                'alamat' => $alamat,
                 'let' => $request->lat,
                 'long' => $request->long,
             ]);

@@ -24,114 +24,96 @@ const Checkout = () => {
         0
     );
 
-    const [provinces, setProvinces] = useState([]);
-    const [cities, setCities] = useState([]);
-    const [districts, setDistricts] = useState([]);
-    const [villages, setVillages] = useState([]);
-
     const { data, setData, get, post, reset } = useForm({
         alamat: "",
-        province: "",
-        city: "",
-        district: "",
-        village: "",
         lat: 0,
         long: 0,
         nama: "",
     });
 
-    // Fetch daftar provinsi saat komponen pertama kali dimuat
-    useEffect(() => {
-        axios
-            .get("https://dev.farizdotid.com/api/daerahindonesia/provinsi")
-            .then((response) => {
-                setProvinces(response.data.provinsi);
-            })
-            .catch((error) =>
-                console.error("Error fetching provinces:", error)
-            );
-    }, []);
+    // // Fetch daftar provinsi saat komponen pertama kali dimuat
+    // useEffect(() => {
+    //     axios
+    //         .get("https://dev.farizdotid.com/api/daerahindonesia/provinsi")
+    //         .then((response) => {
+    //             setProvinces(response.data.provinsi);
+    //         })
+    //         .catch((error) =>
+    //             console.error("Error fetching provinces:", error)
+    //         );
+    // }, []);
 
-    // Fetch daftar kota/kabupaten berdasarkan provinsi yang dipilih
-    useEffect(() => {
-        if (data.province) {
-            let provinsi = data.province;
-            let splitProvinsi = provinsi.split("||");
-            axios
-                .get(
-                    `https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=${splitProvinsi[0]}`
-                )
-                .then((response) => {
-                    setCities(response.data.kota_kabupaten);
-                })
-                .catch((error) =>
-                    console.error("Error fetching cities:", error)
-                );
-        } else {
-            setCities([]);
-            setDistricts([]);
-            setVillages([]);
-        }
-    }, [data.province]);
+    // // Fetch daftar kota/kabupaten berdasarkan provinsi yang dipilih
+    // useEffect(() => {
+    //     if (data.province) {
+    //         let provinsi = data.province;
+    //         let splitProvinsi = provinsi.split("||");
+    //         axios
+    //             .get(
+    //                 `https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=${splitProvinsi[0]}`
+    //             )
+    //             .then((response) => {
+    //                 setCities(response.data.kota_kabupaten);
+    //             })
+    //             .catch((error) =>
+    //                 console.error("Error fetching cities:", error)
+    //             );
+    //     } else {
+    //         setCities([]);
+    //         setDistricts([]);
+    //         setVillages([]);
+    //     }
+    // }, [data.province]);
 
-    // Fetch daftar kecamatan berdasarkan kota/kabupaten yang dipilih
-    useEffect(() => {
-        if (data.city) {
-            let kabupaten = data.city;
-            let splitKabupaten = kabupaten.split("||");
-            axios
-                .get(
-                    `https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=${splitKabupaten[0]}`
-                )
-                .then((response) => {
-                    setDistricts(response.data.kecamatan);
-                })
-                .catch((error) =>
-                    console.error("Error fetching districts:", error)
-                );
-        } else {
-            setDistricts([]);
-            setVillages([]);
-        }
-    }, [data.city]);
+    // // Fetch daftar kecamatan berdasarkan kota/kabupaten yang dipilih
+    // useEffect(() => {
+    //     if (data.city) {
+    //         let kabupaten = data.city;
+    //         let splitKabupaten = kabupaten.split("||");
+    //         axios
+    //             .get(
+    //                 `https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=${splitKabupaten[0]}`
+    //             )
+    //             .then((response) => {
+    //                 setDistricts(response.data.kecamatan);
+    //             })
+    //             .catch((error) =>
+    //                 console.error("Error fetching districts:", error)
+    //             );
+    //     } else {
+    //         setDistricts([]);
+    //         setVillages([]);
+    //     }
+    // }, [data.city]);
 
-    // Fetch daftar desa/kelurahan berdasarkan kecamatan yang dipilih
-    useEffect(() => {
-        if (data.district) {
-            let kecamatan = data.district;
-            let splitKecamatan = kecamatan.split("||");
-            axios
-                .get(
-                    `https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=${splitKecamatan[0]}`
-                )
-                .then((response) => {
-                    setVillages(response.data.kelurahan);
-                })
-                .catch((error) =>
-                    console.error("Error fetching villages:", error)
-                );
-        } else {
-            setVillages([]);
-        }
-    }, [data.district]);
+    // // Fetch daftar desa/kelurahan berdasarkan kecamatan yang dipilih
+    // useEffect(() => {
+    //     if (data.district) {
+    //         let kecamatan = data.district;
+    //         let splitKecamatan = kecamatan.split("||");
+    //         axios
+    //             .get(
+    //                 `https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=${splitKecamatan[0]}`
+    //             )
+    //             .then((response) => {
+    //                 setVillages(response.data.kelurahan);
+    //             })
+    //             .catch((error) =>
+    //                 console.error("Error fetching villages:", error)
+    //             );
+    //     } else {
+    //         setVillages([]);
+    //     }
+    // }, [data.district]);
 
-    useEffect(() => {
-        if (data.village && data.district && data.city && data.province) {
-            setData(
-                "alamat",
-                data.village.split("||")[1] +
-                    ", Kecamatan " +
-                    data.district.split("||")[1] +
-                    ", " +
-                    data.city.split("||")[1] +
-                    ", Provinsi " +
-                    data.province.split("||")[1] +
-                    " (Nama penerima : " +
-                    data.nama +
-                    ")"
-            );
-        }
-    }, [data.village, data.district, data.city, data.province, data.nama]);
+    // useEffect(() => {
+    //     if (data.alamat && data.nama) {
+    //         setData(
+    //             "alamat",
+    //             data.alamat + " (Nama penerima : " + data.nama + ")"
+    //         );
+    //     }
+    // }, [data.alamat, data.nama]);
 
     useEffect(() => {
         if (orders) {
@@ -177,9 +159,9 @@ const Checkout = () => {
     return (
         <ShopLayout>
             <section className="mx-5 md:mx-10 px-4 md:px-8 bg-white border rounded-lg my-8 py-4 antialiased md:py-8">
-                <ol className="items-center flex w-full max-w-2xl text-center text-sm font-medium text-gray-500 sm:text-base">
-                    <li className="after:border-1 flex items-center text-hijau1 after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 dark:text-primary-500 sm:after:inline-block sm:after:content-[''] md:w-full xl:after:mx-10">
-                        <span className="flex items-center after:mx-2 after:text-gray-200 after:content-['/']  sm:after:hidden">
+                <ol className="items-center mb-8 md:mb-6 flex flex-wrap md:flex-nowrap w-full max-w-2xl text-center text-sm font-medium text-gray-500 sm:text-base">
+                    <li className="after:border-1 flex items-center text-hijau1 after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 dark:text-primary-500 sm:after:inline-block sm:after:content-[''] md:w-auto xl:after:mx-10">
+                        <span className="flex items-center after:mx-2 after:text-gray-200 after:content-['/'] sm:after:hidden">
                             <svg
                                 className="me-2 h-4 w-4 sm:h-5 sm:w-5"
                                 aria-hidden="true"
@@ -201,8 +183,8 @@ const Checkout = () => {
                         </span>
                     </li>
 
-                    <li className="after:border-1 flex items-center text-hijau1 after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 dark:text-primary-500 sm:after:inline-block sm:after:content-[''] md:w-full xl:after:mx-10">
-                        <span className="flex items-center after:mx-2 after:text-gray-200 after:content-['/']  sm:after:hidden">
+                    <li className="after:border-1 flex items-center text-hijau1 after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 dark:text-primary-500 sm:after:inline-block sm:after:content-[''] md:w-auto xl:after:mx-10">
+                        <span className="flex items-center after:mx-2 after:text-gray-200 after:content-['/'] sm:after:hidden">
                             <svg
                                 className="me-2 h-4 w-4 sm:h-5 sm:w-5"
                                 aria-hidden="true"
@@ -224,9 +206,9 @@ const Checkout = () => {
                         </span>
                     </li>
 
-                    <li className="flex shrink-0 items-center">
+                    <li className="flex shrink-0 items-center md:w-auto">
                         <svg
-                            className="me-2 h-4 w-4 sm sm:w-5"
+                            className="me-2 h-4 w-4 sm:h-5 sm:w-5"
                             aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -306,146 +288,28 @@ const Checkout = () => {
                                 <div className="sm:col-span-2">
                                     <fieldset className="border-2 border-gray-300 p-4 rounded-lg">
                                         <legend className="text-base font-semibold text-gray-800 px-2">
-                                            Alamat
+                                            Formulir Alamat
                                         </legend>
 
-                                        {/* Provinsi */}
-                                        <div>
-                                            <label
-                                                htmlFor="select-province-input"
-                                                className="block text-sm font-medium text-gray-900 "
-                                            >
-                                                Provinsi
-                                            </label>
-                                            <select
-                                                id="select-province-input"
-                                                name="province"
-                                                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700  dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-                                                value={data.province}
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "province",
-                                                        e.target.value
-                                                    )
-                                                }
-                                            >
-                                                <option value="">
-                                                    Pilih Provinsi
-                                                </option>
-                                                {provinces.map((province) => (
-                                                    <option
-                                                        key={province.id}
-                                                        value={`${province.id}||${province.nama}`}
-                                                    >
-                                                        {province.nama}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div>
-
-                                        {/* Kota/Kabupaten */}
                                         <div className="mt-4">
                                             <label
-                                                htmlFor="select-city-input"
-                                                className="block text-sm font-medium text-gray-900 "
+                                                htmlFor="map"
+                                                className="block text-sm font-medium text-gray-900 mb-3"
                                             >
-                                                Kota/Kabupaten
+                                                Detail Alamat
                                             </label>
-                                            <select
-                                                id="select-city-input"
-                                                name="city"
-                                                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700  dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-                                                value={data.city}
+                                            {/* Alamat */}
+                                            <textarea
+                                                className="textarea textarea-bordered w-full"
+                                                name="alamat"
                                                 onChange={(e) =>
                                                     setData(
-                                                        "city",
+                                                        "alamat",
                                                         e.target.value
                                                     )
                                                 }
-                                                disabled={!data.province}
-                                            >
-                                                <option value="">
-                                                    Pilih Kota/Kabupaten
-                                                </option>
-                                                {cities.map((city) => (
-                                                    <option
-                                                        key={city.id}
-                                                        value={`${city.id}||${city.nama}`}
-                                                    >
-                                                        {city.nama}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div>
-
-                                        {/* Kecamatan */}
-                                        <div className="mt-4">
-                                            <label
-                                                htmlFor="select-district-input"
-                                                className="block text-sm font-medium text-gray-900 "
-                                            >
-                                                Kecamatan
-                                            </label>
-                                            <select
-                                                id="select-district-input"
-                                                name="district"
-                                                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700  dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-                                                value={data.district}
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "district",
-                                                        e.target.value
-                                                    )
-                                                }
-                                                disabled={!data.city}
-                                            >
-                                                <option value="">
-                                                    Pilih Kecamatan
-                                                </option>
-                                                {districts.map((district) => (
-                                                    <option
-                                                        key={district.id}
-                                                        value={`${district.id}||${district.nama}`}
-                                                    >
-                                                        {district.nama}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div>
-
-                                        {/* Desa */}
-                                        <div className="mt-4">
-                                            <label
-                                                htmlFor="select-village"
-                                                className="block text-sm font-medium text-gray-900 "
-                                            >
-                                                Desa/Kelurahan*
-                                            </label>
-                                            <select
-                                                id="select-village"
-                                                name="village"
-                                                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700  dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-                                                value={data.village}
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "village",
-                                                        e.target.value
-                                                    )
-                                                }
-                                                disabled={!data.district}
-                                            >
-                                                <option value="">
-                                                    Pilih Desa/Kelurahan
-                                                </option>
-                                                {villages.map((village) => (
-                                                    <option
-                                                        key={village.id}
-                                                        value={`${village.id}||${village.nama}`}
-                                                    >
-                                                        {village.nama}
-                                                    </option>
-                                                ))}
-                                            </select>
+                                                placeholder="Isikan alamat tujuan anda"
+                                            ></textarea>
                                         </div>
 
                                         {/* Map and Coordinates */}
@@ -581,7 +445,7 @@ const Checkout = () => {
                                     d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
                                 />
                             </svg>
-                            Lanjutkan untuk Pembayaran
+                            Pembayaran
                         </button>
 
                         {err && (

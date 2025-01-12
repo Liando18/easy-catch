@@ -83,8 +83,8 @@ const Payment = () => {
     };
 
     const calculateShippingCost = (distance) => {
-        if (distance < 1) return 0;
-        return distance * 2500;
+        if (distance < 1) return 2000;
+        return distance * 2000;
     };
 
     useEffect(() => {
@@ -153,9 +153,9 @@ const Payment = () => {
         <>
             <ShopLayout>
                 <section className="mx-5 md:mx-10 px-4 md:px-8 bg-white border rounded-lg my-8 py-4 antialiased md:py-8">
-                    <ol className="items-center flex w-full max-w-2xl text-center text-sm font-medium text-gray-500 sm:text-base">
-                        <li className="after:border-1 flex items-center text-hijau1 after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 dark:text-primary-500 sm:after:inline-block sm:after:content-[''] md:w-full xl:after:mx-10">
-                            <span className="flex items-center after:mx-2 after:text-gray-200 after:content-['/']  sm:after:hidden">
+                    <ol className="items-center mb-8 md:mb-6 flex flex-wrap md:flex-nowrap w-full max-w-2xl text-center text-sm font-medium text-gray-500 sm:text-base">
+                        <li className="after:border-1 flex items-center text-hijau1 after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 dark:text-primary-500 sm:after:inline-block sm:after:content-[''] md:w-auto xl:after:mx-10">
+                            <span className="flex items-center after:mx-2 after:text-gray-200 after:content-['/'] sm:after:hidden">
                                 <svg
                                     className="me-2 h-4 w-4 sm:h-5 sm:w-5"
                                     aria-hidden="true"
@@ -177,8 +177,8 @@ const Payment = () => {
                             </span>
                         </li>
 
-                        <li className="after:border-1 flex items-center text-hijau1 after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 dark:text-primary-500 sm:after:inline-block sm:after:content-[''] md:w-full xl:after:mx-10">
-                            <span className="flex items-center after:mx-2 after:text-gray-200 after:content-['/']  sm:after:hidden">
+                        <li className="after:border-1 flex items-center text-hijau1 after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 dark:text-primary-500 sm:after:inline-block sm:after:content-[''] md:w-auto xl:after:mx-10">
+                            <span className="flex items-center after:mx-2 after:text-gray-200 after:content-['/'] sm:after:hidden">
                                 <svg
                                     className="me-2 h-4 w-4 sm:h-5 sm:w-5"
                                     aria-hidden="true"
@@ -200,9 +200,9 @@ const Payment = () => {
                             </span>
                         </li>
 
-                        <li className="flex shrink-0 items-center text-hijau1">
+                        <li className="flex shrink-0 items-center text-hijau1 md:w-auto">
                             <svg
-                                className="me-2 h-4 w-4 sm sm:w-5"
+                                className="me-2 h-4 w-4 sm:h-5 sm:w-5"
                                 aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -222,7 +222,7 @@ const Payment = () => {
                         </li>
                     </ol>
 
-                    <div className="px-4 2xl:px-0 mt-8 md:mt-6">
+                    <div className="2xl:px-0 mt-8 md:mt-6">
                         <h2 className="text-xl font-semibold text-gray-900 sm:text-2xl">
                             {title}
                         </h2>
@@ -351,8 +351,21 @@ const Payment = () => {
                                                     <div>
                                                         <div className="my-4">
                                                             <h3 className="text-base font-semibold mb-1">
+                                                                Media Pembayaran
+                                                            </h3>
+
+                                                            <h3>
+                                                                {
+                                                                    payment
+                                                                        .store
+                                                                        .pembayaran
+                                                                }
+                                                            </h3>
+                                                            <hr className="my-2 border border-gray-200 px-3" />
+                                                            <h3 className="text-base font-semibold my-1">
                                                                 No Pembayaran
                                                             </h3>
+
                                                             <h3>
                                                                 {
                                                                     payment
@@ -360,8 +373,9 @@ const Payment = () => {
                                                                         .qris
                                                                 }
                                                             </h3>
+                                                            <hr className="my-2 border border-gray-200 px-3" />
                                                         </div>
-                                                        <hr className="my-2 border border-gray-200" />
+
                                                         <div className="my-4">
                                                             <h3 className="text-base font-semibold mb-1">
                                                                 Qris Pembayaran
@@ -681,7 +695,7 @@ const Payment = () => {
                                                                                       )
                                                                                     : "Gratis Ongkir"}
                                                                             </p>
-                                                                            <p className="text-base font-semibold">
+                                                                            {/* <p className="text-base font-semibold">
                                                                                 Alternatif
                                                                                 Pengiriman
                                                                                 Paket:{" "}
@@ -689,7 +703,7 @@ const Payment = () => {
                                                                                 2
                                                                                     ? "Motor"
                                                                                     : "Drone"}
-                                                                            </p>
+                                                                            </p> */}
                                                                         </div>
                                                                     </>
                                                                 ) : (

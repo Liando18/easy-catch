@@ -89,7 +89,6 @@ class PesananController extends Controller
             'store_id' => 'required',
             'payment_id' => 'required',
             'status' => 'required',
-            'pengiriman' => 'required'
         ]);
 
         try {
@@ -113,7 +112,6 @@ class PesananController extends Controller
                 'payment_id' => $request->payment_id,
                 'ongkir' => $request->ongkir,
                 'status' => $request->status,
-                'pengiriman' => $request->pengiriman,
             ]);
 
             foreach ($data_item as $item) {

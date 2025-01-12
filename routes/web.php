@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataAksesController;
 use App\Http\Controllers\DataCustomerController;
 use App\Http\Controllers\DataMerchantController;
+use App\Http\Controllers\DataPengirimanController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\PembayaranController;
@@ -93,6 +94,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard/data_customer', [DataCustomerController::class, 'index'])->name('data_customer');
     Route::put('/dashboard/data_customer/{id}', [DataCustomerController::class, 'update'])->name('data_customer');
     Route::delete('/dashboard/data_customer/{id}', [DataCustomerController::class, 'destroy'])->name('data_customer');
+
+    Route::get('/dashboard/data_pengiriman', [DataPengirimanController::class, 'index'])->name('data_pengiriman');
+    Route::get('/dashboard/data_pengiriman/{id}/view', [DataPengirimanController::class, 'show'])->name('data_pengiriman');
+    Route::put('/dashboard/data_pengiriman/{id}/update', [DataPengirimanController::class, 'update'])->name('data_pengiriman');
 });
 
 Route::middleware('auth')->group(function () {

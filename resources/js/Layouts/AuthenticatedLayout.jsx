@@ -29,38 +29,61 @@ export default function Authenticated({ user, header, children }) {
                                     Dashboard
                                 </NavLink>
                             </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
-                                    href="/dashboard/data_akses"
-                                    active={route().current("data_akses")}
-                                >
-                                    Data Akses
-                                </NavLink>
-                            </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
-                                    href="/dashboard/data_category"
-                                    active={route().current("data_category")}
-                                >
-                                    Data Category
-                                </NavLink>
-                            </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
-                                    href="/dashboard/data_merchant"
-                                    active={route().current("data_merchant")}
-                                >
-                                    Data Merchant
-                                </NavLink>
-                            </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
-                                    href="/dashboard/data_customer"
-                                    active={route().current("data_customer")}
-                                >
-                                    Data Customer
-                                </NavLink>
-                            </div>
+                            {user.user.role == "5" ? (
+                                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                    <NavLink
+                                        href="/dashboard/data_pengiriman"
+                                        active={route().current(
+                                            "data_pengiriman"
+                                        )}
+                                    >
+                                        Data Pengiriman
+                                    </NavLink>
+                                </div>
+                            ) : (
+                                <>
+                                    <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                        <NavLink
+                                            href="/dashboard/data_akses"
+                                            active={route().current(
+                                                "data_akses"
+                                            )}
+                                        >
+                                            Data Akses
+                                        </NavLink>
+                                    </div>
+                                    <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                        <NavLink
+                                            href="/dashboard/data_category"
+                                            active={route().current(
+                                                "data_category"
+                                            )}
+                                        >
+                                            Data Category
+                                        </NavLink>
+                                    </div>
+                                    <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                        <NavLink
+                                            href="/dashboard/data_merchant"
+                                            active={route().current(
+                                                "data_merchant"
+                                            )}
+                                        >
+                                            Data Merchant
+                                        </NavLink>
+                                    </div>
+                                    <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                        <NavLink
+                                            href="/dashboard/data_customer"
+                                            active={route().current(
+                                                "data_customer"
+                                            )}
+                                        >
+                                            Data Customer
+                                        </NavLink>
+                                    </div>
+                                </>
+                            )}
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ms-6">
@@ -160,38 +183,51 @@ export default function Authenticated({ user, header, children }) {
                             Dashboard
                         </ResponsiveNavLink>
                     </div>
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink
-                            href="/dashboard/data_akses"
-                            active={route().current("data_akses")}
-                        >
-                            Data Akses
-                        </ResponsiveNavLink>
-                    </div>
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink
-                            href={route("dashboard")}
-                            active={route().current("dashboard")}
-                        >
-                            Data Category
-                        </ResponsiveNavLink>
-                    </div>
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink
-                            href="/dashboard/data_merchant"
-                            active={route().current("data_merchant")}
-                        >
-                            Data Merchant
-                        </ResponsiveNavLink>
-                    </div>
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink
-                            href="/dashboard/data_customer"
-                            active={route().current("data_customer")}
-                        >
-                            Data Customer
-                        </ResponsiveNavLink>
-                    </div>
+                    {user.user.role == "5" ? (
+                        <div className="pt-2 pb-3 space-y-1">
+                            <ResponsiveNavLink
+                                href="/dashboard/data_pengiriman"
+                                active={route().current("data_pengiriman")}
+                            >
+                                Data Pengiriman
+                            </ResponsiveNavLink>
+                        </div>
+                    ) : (
+                        <>
+                            <div className="pt-2 pb-3 space-y-1">
+                                <ResponsiveNavLink
+                                    href="/dashboard/data_akses"
+                                    active={route().current("data_akses")}
+                                >
+                                    Data Akses
+                                </ResponsiveNavLink>
+                            </div>
+                            <div className="pt-2 pb-3 space-y-1">
+                                <ResponsiveNavLink
+                                    href={route("dashboard")}
+                                    active={route().current("dashboard")}
+                                >
+                                    Data Category
+                                </ResponsiveNavLink>
+                            </div>
+                            <div className="pt-2 pb-3 space-y-1">
+                                <ResponsiveNavLink
+                                    href="/dashboard/data_merchant"
+                                    active={route().current("data_merchant")}
+                                >
+                                    Data Merchant
+                                </ResponsiveNavLink>
+                            </div>
+                            <div className="pt-2 pb-3 space-y-1">
+                                <ResponsiveNavLink
+                                    href="/dashboard/data_customer"
+                                    active={route().current("data_customer")}
+                                >
+                                    Data Customer
+                                </ResponsiveNavLink>
+                            </div>
+                        </>
+                    )}
 
                     <div className="pt-4 pb-1 border-t border-gray-200">
                         <div className="px-4">

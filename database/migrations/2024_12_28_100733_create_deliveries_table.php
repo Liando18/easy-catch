@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignUuid('payment_id')->constrained('payment', 'id')->cascadeOnDelete();
             $table->double('ongkir', 20, 6);
             $table->enum('status', ['1', '2', '3', '4']);
-            $table->enum('pengiriman', ['1', '2', '3']);
             $table->timestamps();
         });
     }

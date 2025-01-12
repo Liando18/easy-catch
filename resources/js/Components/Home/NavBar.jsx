@@ -15,7 +15,7 @@ const NavBar = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 300) {
+            if (window.scrollY > 100) {
                 setIsScrolled(true);
             } else {
                 setIsScrolled(false);
@@ -63,13 +63,36 @@ const NavBar = () => {
                                                 : "text-white"
                                         } hover:text-hijau1 transition-all duration-300}`}
                                     >
-                                        Home
+                                        Beranda
                                     </a>
                                 </li>
-                                <li></li>
                                 <li>
                                     <a
-                                        href="/shop"
+                                        href="#about"
+                                        className={`font-semibold ${
+                                            isScrolled
+                                                ? "text-hijau4"
+                                                : "text-white"
+                                        } hover:text-hijau1 transition-all duration-300}`}
+                                    >
+                                        Tentang
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#service"
+                                        className={`font-semibold ${
+                                            isScrolled
+                                                ? "text-hijau4"
+                                                : "text-white"
+                                        } hover:text-hijau1 transition-all duration-300}`}
+                                    >
+                                        Layanan
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#shop"
                                         className={`font-semibold ${
                                             isScrolled
                                                 ? "text-hijau4"
@@ -81,14 +104,14 @@ const NavBar = () => {
                                 </li>
                                 <li>
                                     <a
-                                        href="/contact"
+                                        href="#contact"
                                         className={`font-semibold ${
                                             isScrolled
                                                 ? "text-hijau4"
                                                 : "text-white"
                                         } hover:text-hijau1 transition-all duration-300}`}
                                     >
-                                        Contact
+                                        Kontak
                                     </a>
                                 </li>
                             </ul>
@@ -152,13 +175,19 @@ const NavBar = () => {
                                         </a>
                                     </li>
                                     <li className="font-semibold text-hijau4 hover:text-hijau1 transition-all duration-300">
-                                        Home
+                                        <a href="/">Home</a>
                                     </li>
                                     <li className="font-semibold text-hijau4 hover:text-hijau1 transition-all duration-300">
-                                        Marketplace
+                                        <a href="#about">Tentang</a>
                                     </li>
                                     <li className="font-semibold text-hijau4 hover:text-hijau1 transition-all duration-300">
-                                        Contact
+                                        <a href="#service">Layanan</a>
+                                    </li>
+                                    <li className="font-semibold text-hijau4 hover:text-hijau1 transition-all duration-300">
+                                        <a href="#shop">Marketplace</a>
+                                    </li>
+                                    <li className="font-semibold text-hijau4 hover:text-hijau1 transition-all duration-300">
+                                        <a href="#contact">Kontak</a>
                                     </li>
                                     <li className="my-5">
                                         <a

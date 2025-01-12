@@ -20,6 +20,7 @@ const Store = () => {
         merchant_id: auth.user.data.id,
         nama: data_toko.nama,
         deskripsi: data_toko.deskripsi,
+        pembayaran: data_toko.pembayaran,
         qris: data_toko.qris,
         foto: null,
         alamat: data_toko.alamat,
@@ -37,6 +38,7 @@ const Store = () => {
         formData.append("merchant_id", data.merchant_id);
         formData.append("nama", data.nama);
         formData.append("deskripsi", data.deskripsi);
+        formData.append("pembayaran", data.pembayaran);
         formData.append("qris", data.qris);
         if (data.foto) formData.append("foto", data.foto);
         formData.append("alamat", data.alamat);
@@ -179,6 +181,23 @@ const Store = () => {
                         htmlFor="website-admin"
                         className="block mb-2 text-sm font-medium text-gray-900"
                     >
+                        Nama Bank atau Media Pembayaran Lainnya
+                    </label>
+                    <input
+                        type="text"
+                        name="pembayaran"
+                        value={data.pembayaran}
+                        onChange={(e) => setData("pembayaran", e.target.value)}
+                        placeholder="Masukan Nama Media Pembayaran (Misalnya: Bank BRI atau Dana)"
+                        className="input input-bordered w-full max-w-full"
+                        required
+                    />
+                </div>
+                <div className="mb-5">
+                    <label
+                        htmlFor="website-admin"
+                        className="block mb-2 text-sm font-medium text-gray-900"
+                    >
                         Nomor Rekening atau via pembayaran Toko Anda
                     </label>
                     <input
@@ -190,6 +209,28 @@ const Store = () => {
                         className="input input-bordered w-full max-w-full"
                         required
                     />
+                </div>
+                <div className="mb-5">
+                    <label
+                        htmlFor="website-admin"
+                        className="block mb-2 text-sm font-medium text-gray-900"
+                    >
+                        QRIS Code untuk Pembayaran Toko Anda
+                    </label>
+                    <QRCodeCanvas
+                        id="qr-code"
+                        value={data.qris}
+                        size={200}
+                        fgColor="#000000"
+                        bgColor="#ffffff"
+                    />
+                    <button
+                        type="button"
+                        onClick={handleDownload}
+                        className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg"
+                    >
+                        Simpan QR Code
+                    </button>
                 </div>
                 <div className="mb-5">
                     <label
@@ -230,30 +271,7 @@ const Store = () => {
                     </MapContainer>
                 </div>
                 {/* Menampilkan QR Code berdasarkan nomor pembayaran */}
-                {data.qris && (
-                    <div className="mb-5">
-                        <label
-                            htmlFor="website-admin"
-                            className="block mb-2 text-sm font-medium text-gray-900"
-                        >
-                            QRIS Code untuk Pembayaran Toko Anda
-                        </label>
-                        <QRCodeCanvas
-                            id="qr-code"
-                            value={data.qris}
-                            size={200}
-                            fgColor="#000000"
-                            bgColor="#ffffff"
-                        />
-                        <button
-                            type="button"
-                            onClick={handleDownload}
-                            className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg"
-                        >
-                            Simpan QR Code
-                        </button>
-                    </div>
-                )}
+
                 <div className="mb-5">
                     <label
                         htmlFor="website-admin"

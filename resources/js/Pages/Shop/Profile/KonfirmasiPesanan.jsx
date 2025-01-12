@@ -31,7 +31,6 @@ const KonfirmasiPesanan = () => {
         payment_id: payment.id,
         ongkir: 0,
         status: "1",
-        pengiriman: "",
         qty: totalJumlah,
     });
 
@@ -94,7 +93,7 @@ const KonfirmasiPesanan = () => {
 
     const calculateShippingCost = () => {
         const distance = calculateDistance();
-        const cost = distance < 1 ? 0 : distance * 2500;
+        const cost = distance < 1 ? 2000 : distance * 2000;
         setShippingCost(cost);
         setData("ongkir", cost);
     };
@@ -302,12 +301,12 @@ const KonfirmasiPesanan = () => {
                                                 ? formatTime(estimatedTime)
                                                 : "-"}
                                         </p>
-                                        <p className="text-base font-semibold">
+                                        {/* <p className="text-base font-semibold">
                                             Alternatif Pengiriman Paket :{" "}
                                             {distance.toFixed(2) >= 2
                                                 ? "Motor"
                                                 : "Drone"}
-                                        </p>
+                                        </p> */}
                                     </dd>
                                 </dl>
                             </div>

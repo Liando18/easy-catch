@@ -46,11 +46,6 @@ const NavBar = () => {
                                             className="relative flex items-center justify-center gap-2 p-2 rounded-md hover:text-hijau1"
                                         >
                                             <i className="fa-solid fa-cart-shopping text-hijau4 group-hover:text-hijau1"></i>
-                                            {cartCount > 0 && (
-                                                <span className="absolute top-1 right-0 w-4 h-4 text-xs text-white bg-red-500 rounded-full flex items-center justify-center">
-                                                    {cartCount}
-                                                </span>
-                                            )}
                                         </a>
                                         <a
                                             href={`/shop/profile`}

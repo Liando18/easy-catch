@@ -34,7 +34,7 @@ class HandleInertiaRequests extends Middleware
         $roleData = null;
 
         if ($account) {
-            if (in_array($account->role, ['1', '2'])) {
+            if (in_array($account->role, ['1', '2', '5'])) {
                 $roleData = $account->platform_owner;
             } elseif (in_array($account->role, ['3', '4'])) {
                 $roleData = $account->user;

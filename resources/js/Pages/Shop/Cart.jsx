@@ -62,9 +62,9 @@ const Cart = () => {
         <ShopLayout>
             <section className="mx-5 md:mx-10 px-4 md:px-8 bg-white border rounded-lg my-8 py-4 antialiased md:py-8">
                 {data_cart.length > 0 && (
-                    <ol className="items-center mb-8 md:mb-6 flex w-full max-w-2xl text-center text-sm font-medium text-gray-500 sm:text-base">
-                        <li className="after:border-1 flex items-center text-hijau1 after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 dark:text-primary-500 sm:after:inline-block sm:after:content-[''] md:w-full xl:after:mx-10">
-                            <span className="flex items-center after:mx-2 after:text-gray-200 after:content-['/']  sm:after:hidden">
+                    <ol className="items-center mb-8 md:mb-6 flex flex-wrap md:flex-nowrap w-full max-w-2xl text-center text-sm font-medium text-gray-500 sm:text-base">
+                        <li className="after:border-1 flex items-center text-hijau1 after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 dark:text-primary-500 sm:after:inline-block sm:after:content-[''] md:w-auto xl:after:mx-10">
+                            <span className="flex items-center after:mx-2 after:text-gray-200 after:content-['/'] sm:after:hidden">
                                 <svg
                                     className="me-2 h-4 w-4 sm:h-5 sm:w-5"
                                     aria-hidden="true"
@@ -86,8 +86,8 @@ const Cart = () => {
                             </span>
                         </li>
 
-                        <li className="after:border-1 flex items-center after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 dark:text-primary-500 sm:after:inline-block sm:after:content-[''] md:w-full xl:after:mx-10">
-                            <span className="flex items-center after:mx-2 after:text-gray-200 after:content-['/']  sm:after:hidden">
+                        <li className="after:border-1 flex items-center after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 dark:text-primary-500 sm:after:inline-block sm:after:content-[''] md:w-auto xl:after:mx-10">
+                            <span className="flex items-center after:mx-2 after:text-gray-200 after:content-['/'] sm:after:hidden">
                                 <svg
                                     className="me-2 h-4 w-4 sm:h-5 sm:w-5"
                                     aria-hidden="true"
@@ -109,9 +109,9 @@ const Cart = () => {
                             </span>
                         </li>
 
-                        <li className="flex shrink-0 items-center">
+                        <li className="flex shrink-0 items-center md:w-auto">
                             <svg
-                                className="me-2 h-4 w-4 sm sm:w-5"
+                                className="me-2 h-4 w-4 sm:h-5 sm:w-5"
                                 aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -312,7 +312,7 @@ const Cart = () => {
                                         </dl>
                                         <a
                                             href="/shop/checkout"
-                                            className="bg-teal-500 flex gap-2 justify-center items-center text-white px-6 py-2 rounded-full w-full hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2"
+                                            className="bg-teal-500 text-sm md:text-base flex gap-2 justify-center items-center text-white px-6 py-2 rounded-full w-full hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2"
                                         >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -328,7 +328,7 @@ const Cart = () => {
                                                     d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
                                                 />
                                             </svg>
-                                            Lanjutkan untuk Chackout
+                                            Chackout
                                         </a>
                                     </div>
                                 </div>
@@ -345,7 +345,7 @@ const Cart = () => {
 
                 {/* Modal Edit */}
                 <dialog id="modal-edit" className="modal">
-                    <div className="modal-box w-1/2 md:w-1/4 max-w-full">
+                    <div className="modal-box w-11/12 md:w-1/4 max-w-full">
                         <form method="dialog">
                             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                                 ✕

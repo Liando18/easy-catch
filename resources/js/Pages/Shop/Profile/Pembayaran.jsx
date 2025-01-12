@@ -71,16 +71,20 @@ const Pembayaran = () => {
                                                     <td>-</td>
                                                 )}
                                                 <td>
-                                                    <a
-                                                        href={`/img/payment/${row.bukti_pembayaran}`}
-                                                        target="_blank"
-                                                    >
-                                                        <img
-                                                            src={`/img/payment/${row.bukti_pembayaran}`}
-                                                            alt="..."
-                                                            className="w-[70px] h-[90px] mx-auto"
-                                                        />
-                                                    </a>
+                                                    {row.bukti_pembayaran ? (
+                                                        <a
+                                                            href={`/img/payment/${row.bukti_pembayaran}`}
+                                                            target="_blank"
+                                                        >
+                                                            <img
+                                                                src={`/img/payment/${row.bukti_pembayaran}`}
+                                                                alt="..."
+                                                                className="w-[70px] h-[90px] mx-auto"
+                                                            />
+                                                        </a>
+                                                    ) : (
+                                                        "-"
+                                                    )}
                                                 </td>
                                                 <td>
                                                     <a

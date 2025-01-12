@@ -17,6 +17,7 @@ class PlatformOwnerSeeder extends Seeder
     {
         $account1 = Account::where('email', '=', 'founder@gmail.com')->first();
         $account2 = Account::where('email', '=', 'admin@gmail.com')->first();
+        $account3 = Account::where('email', '=', 'distributor@gmail.com')->first();
 
         // dd($account1->id);
 
@@ -32,6 +33,12 @@ class PlatformOwnerSeeder extends Seeder
                 'account_id' => $account2->id,
                 'nama' => 'Super Admin',
                 'jabatan' => '2',
+            ],
+            [
+                'id' => Str::uuid(),
+                'account_id' => $account3->id,
+                'nama' => 'Distributor',
+                'jabatan' => '3',
             ],
         ];
 

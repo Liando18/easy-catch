@@ -121,7 +121,6 @@ const Pengiriman = () => {
                                             <th>Jumlah Beli</th>
                                             <th>Ongkir</th>
                                             <th>Total Harga</th>
-                                            <th>Pengiriman</th>
                                             <th>Status Pengirman</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -142,13 +141,6 @@ const Pengiriman = () => {
                                                         row.totalPrice
                                                     )}
                                                 </td>
-                                                <td>
-                                                    {row.pengiriman == "1"
-                                                        ? "Drone"
-                                                        : row.pengiriman == "2"
-                                                        ? "Motor"
-                                                        : "Mobil"}
-                                                </td>
                                                 <td
                                                     className={`font-bold ${
                                                         row.status == "1" ||
@@ -163,7 +155,7 @@ const Pengiriman = () => {
                                                     {row.payment.status == "1"
                                                         ? "Belum dikonfirmasi"
                                                         : row.status == "1"
-                                                        ? "Proses Pengemasan"
+                                                        ? "Proses"
                                                         : row.status == "2"
                                                         ? "Dikirim"
                                                         : row.status == "3"
@@ -178,14 +170,14 @@ const Pengiriman = () => {
                                                         View Produk
                                                     </a>
 
-                                                    <button
+                                                    {/* <button
                                                         onClick={() =>
                                                             rowCart(row)
                                                         }
                                                         className="btn btn-warning text-white btn-xs mb-2 md:me-1"
                                                     >
                                                         Update Status
-                                                    </button>
+                                                    </button> */}
                                                 </td>
                                             </tr>
                                         ))}

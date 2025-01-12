@@ -18,6 +18,7 @@ class Store extends Model
         'merchant_id',
         'nama',
         'deskripsi',
+        'pembayaran',
         'qris',
         'alamat',
         'long',

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignUuid('merchant_id')->constrained('user', 'id')->cascadeOnDelete();
             $table->string('nama', 50);
             $table->text('deskripsi');
-            $table->string('qris', 50);
+            $table->string('pembayaran');
+            $table->double('qris');
             $table->text('foto');
             $table->text('alamat');
             $table->double('long', 20, 14);
