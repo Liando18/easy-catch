@@ -72,12 +72,13 @@ class MerchantController extends Controller
             'let.required' => 'Let tidak boleh kosong',
         ]);
 
-        if ($request->foto && file_exists(public_path('img/store/' . $request->foto))) {
-            unlink(public_path('img/store/' . $request->foto));
-        }
+        $path = $_SERVER['DOCUMENT_ROOT'] . "/img/store/";
 
-        $fileName = time() . "_" . $request->nama . "-" . $request->file('foto')->getClientOriginalName();
-        $request->file('foto')->move(public_path('img/store/'), $fileName);
+        if ($request->hasFile('foto')) {
+            $fileName = time() . "_" . $request->nama . "-" . $request->file('foto')->getClientOriginalName();
+
+            $request->file('foto')->move($path, $fileName);
+        }
 
         Account::findOrFail($request->account_id)->update([
             'role' => '3'
@@ -100,8 +101,9 @@ class MerchantController extends Controller
             'let' => $request->let,
         ]);
 
-        return back();
+        return back()->with('message', 'Data toko berhasil ditambahkan');
     }
+
 
     public function update(Request $request, $id)
     {
@@ -129,14 +131,15 @@ class MerchantController extends Controller
 
         $store = Store::findOrFail($id);
 
+        $path = $_SERVER['DOCUMENT_ROOT'] . "/img/store/";
+
         if ($request->hasFile('foto')) {
-            if ($store->foto && file_exists(public_path('img/store/' . $store->foto))) {
-                unlink(public_path('img/store/' . $store->foto));
+            if ($store->foto && file_exists($path . $store->foto)) {
+                unlink($path . $store->foto);
             }
 
-            $fileName = $request->nama . "-" . $request->file('foto')->getClientOriginalName();
-            $request->file('foto')->move(public_path('img/store/'), $fileName);
-
+            $fileName = $request->nama . "-" . time() . "-" . $request->file('foto')->getClientOriginalName();
+            $request->file('foto')->move($path, $fileName);
             $store->foto = $fileName;
         }
 
@@ -151,6 +154,7 @@ class MerchantController extends Controller
 
         return back()->with('message', 'Data toko berhasil diperbarui');
     }
+
 
     public function merchant()
     {

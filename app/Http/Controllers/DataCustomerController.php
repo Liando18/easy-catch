@@ -89,11 +89,11 @@ class DataCustomerController extends Controller
         }
         $account->save();
 
+        $path = $_SERVER['DOCUMENT_ROOT'] . "/img/user/";
+
         if ($request->hasFile('foto')) {
             $fileName = time() . "_" . $request->file('foto')->getClientOriginalName();
-
-            $request->file('foto')->move(public_path('img/user/'), $fileName);
-
+            $request->file('foto')->move($path, $fileName);
             $customer->foto = $fileName;
         }
 

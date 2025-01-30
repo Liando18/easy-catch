@@ -29,7 +29,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
+        // Validasi
         $request->validate([
             'category_id' => 'required',
             'nama' => 'required',
@@ -38,7 +38,7 @@ class ProductController extends Controller
             'stok' => 'required',
             'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ], [
-            'category_id.required' => 'Kategory harus dipilih',
+            'category_id.required' => 'Kategori harus dipilih',
             'nama.required' => 'Nama tidak boleh kosong',
             'deskripsi.required' => 'Deskripsi tidak boleh kosong',
             'harga.required' => 'Harga tidak boleh kosong',
@@ -49,12 +49,22 @@ class ProductController extends Controller
         ]);
 
         try {
-            if ($request->foto && file_exists(public_path('img/product/' . $request->foto))) {
-                unlink(public_path('img/product/' . $request->foto));
+            $path = $_SERVER['DOCUMENT_ROOT'] . "/img/product/";
+
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+
+            $existingProduct = Product::where('nama', $request->nama)->first();
+            if ($existingProduct && $existingProduct->foto) {
+                $oldFile = $path . $existingProduct->foto;
+                if (file_exists($oldFile)) {
+                    unlink($oldFile);
+                }
             }
 
             $fileName = time() . "_" . $request->nama . "_" . $request->file('foto')->getClientOriginalName();
-            $request->file('foto')->move(public_path('img/product/'), $fileName);
+            $request->file('foto')->move($path, $fileName);
 
             Product::create([
                 'id' => Str::uuid(),
@@ -70,9 +80,10 @@ class ProductController extends Controller
 
             return back()->with('message', 'Data produk anda berhasil ditambahkan');
         } catch (\Exception $e) {
-            return back()->with('message', 'Ada kesalahan pada server : ' . $e->getMessage());
+            return back()->with('message', 'Ada kesalahan pada server: ' . $e->getMessage());
         }
     }
+
 
     public function update(Request $request, $id)
     {
@@ -84,7 +95,7 @@ class ProductController extends Controller
             'stok' => 'required',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ], [
-            'category_id.required' => 'Kategory harus dipilih',
+            'category_id.required' => 'Kategori harus dipilih',
             'nama.required' => 'Nama tidak boleh kosong',
             'deskripsi.required' => 'Deskripsi tidak boleh kosong',
             'harga.required' => 'Harga tidak boleh kosong',
@@ -96,13 +107,22 @@ class ProductController extends Controller
         try {
             $product = Product::findOrFail($id);
 
+            $path = $_SERVER['DOCUMENT_ROOT'] . "/img/product/";
+
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+
             if ($request->hasFile('foto')) {
-                if ($product->foto && file_exists(public_path('img/product/' . $product->foto))) {
-                    unlink(public_path('img/product/' . $product->foto));
+                if ($product->foto) {
+                    $oldFile = $path . $product->foto;
+                    if (file_exists($oldFile)) {
+                        unlink($oldFile);
+                    }
                 }
 
                 $fileName = time() . "_" . $request->nama . "_" . $request->file('foto')->getClientOriginalName();
-                $request->file('foto')->move(public_path('img/product/'), $fileName);
+                $request->file('foto')->move($path, $fileName);
 
                 $product->foto = $fileName;
             }
@@ -116,26 +136,41 @@ class ProductController extends Controller
 
             return back()->with('message', 'Data produk anda berhasil diperbarui');
         } catch (\Exception $e) {
-            return back()->with('message', 'Ada kesalahan pada server : ' . $e->getMessage());
+            return back()->with('message', 'Ada kesalahan pada server: ' . $e->getMessage());
         }
     }
+
 
     public function destroy($id)
     {
         try {
             $product = Product::findOrFail($id);
 
-            if ($product->foto && file_exists(public_path('img/product/' . $product->foto))) {
-                unlink(public_path('img/product/' . $product->foto));
+            // Path folder di cPanel (public_html/img/product/)
+            $path = $_SERVER['DOCUMENT_ROOT'] . "/img/product/";
+
+            // Cek apakah folder sudah ada, jika tidak buat baru
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
             }
 
+            // Hapus foto jika ada
+            if ($product->foto) {
+                $filePath = $path . $product->foto;
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
+            }
+
+            // Hapus data produk dari database
             $product->delete();
 
             return back()->with('message', 'Data produk anda berhasil dihapus');
         } catch (\Exception $e) {
-            return back()->with('message', 'Ada kesalahan pada server : ' . $e->getMessage());
+            return back()->with('message', 'Ada kesalahan pada server: ' . $e->getMessage());
         }
     }
+
 
     public function productView()
     {

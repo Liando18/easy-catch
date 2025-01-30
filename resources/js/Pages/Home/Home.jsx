@@ -1,10 +1,51 @@
 import HomeLayout from "@/Layouts/HomeLayout";
+import { Head, usePage } from "@inertiajs/react";
+import { Inertia } from "@inertiajs/inertia";
+import { useState } from "react";
+import BtnApp from "./BtnApp";
 
 const Home = () => {
+    const props = usePage().props;
+    const [form, setForm] = useState({ name: "", email: "", message: "" });
+
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        Inertia.post("/feedback", form, {
+            onSuccess: () => alert("Pesan berhasil dikirim!"),
+            onError: (errors) => alert(errors.message),
+        });
+    };
+
     return (
         <>
+            <Head
+                title="Home"
+                meta={[
+                    {
+                        name: "description",
+                        content:
+                            "EasyCatch adalah platform marketplace inovatif yang menghubungkan penjual dan pembeli dari berbagai sektor untuk menciptakan pengalaman berbelanja online yang praktis dan menyenangkan. Sebagai salah satu marketplace terdepan, EasyCatch menyediakan berbagai kategori produk mulai dari elektronik, fashion, kebutuhan rumah tangga, hingga produk kecantikan dan kesehatan. Kami berfokus pada kualitas, dengan menawarkan produk-produk pilihan dari berbagai penjual terpercaya yang telah melalui proses seleksi ketat.",
+                    },
+                    {
+                        name: "keywords",
+                        content:
+                            "shop, belanja, easy catch, EasyCath, Easy Catch, drone, jasa pengiriman, jasa, pengiriman",
+                    },
+                    { property: "og:title", content: "EasyCatch" },
+                    {
+                        property: "og:description",
+                        content:
+                            "EasyCatch adalah platform marketplace inovatif yang menghubungkan penjual dan pembeli dari berbagai sektor untuk menciptakan pengalaman berbelanja online yang praktis dan menyenangkan. Sebagai salah satu marketplace terdepan, EasyCatch menyediakan berbagai kategori produk mulai dari elektronik, fashion, kebutuhan rumah tangga, hingga produk kecantikan dan kesehatan. Kami berfokus pada kualitas, dengan menawarkan produk-produk pilihan dari berbagai penjual terpercaya yang telah melalui proses seleksi ketat.",
+                    },
+                    { property: "og:type", content: "website" },
+                ]}
+            />
             <HomeLayout>
-                <section className="flex items-center justify-center h-screen w-full bg-center bg-no-repeat bg-cover bg-[url('/img/bg-market.jpg')] bg-gray-800 bg-blend-multiply">
+                <section className="flex items-center justify-center h-screen w-full bg-center bg-no-repeat bg-cover bg-[url('img/bg-market.jpg')] bg-gray-800 bg-blend-multiply">
                     <div className="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56 ">
                         <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
                             Selamat Datang di{" "}
@@ -36,12 +77,7 @@ const Home = () => {
                                     />
                                 </svg>
                             </a>
-                            <a
-                                href="/signup"
-                                className="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-white rounded-full border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400"
-                            >
-                                Sign Up
-                            </a>
+                            <BtnApp />
                         </div>
                     </div>
                 </section>
@@ -95,7 +131,7 @@ const Home = () => {
                                         className="inline-flex justify-center items-center py-3 px-5 me-3 md:me-0 text-base font-medium text-center text-white rounded-full bg-hijau1 hover:bg-hijau3 focus:ring-4 focus:ring-blue-300"
                                     >
                                         Sign Up Your Account
-                                        <i class="fa-solid fa-right-to-bracket w-3.5 h-3.5 ms-2 rtl:rotate-180"></i>
+                                        <i className="fa-solid fa-right-to-bracket w-3.5 h-3.5 ms-2 rtl:rotate-180"></i>
                                     </a>
                                 </div>
 
@@ -162,21 +198,21 @@ const Home = () => {
                 </section>
 
                 <section id="shop" className="py-10 px-4 md:px-16 bg-slate-100">
-                    <div class="relative flex flex-col items-center mx-auto lg:flex-row-reverse lg:max-w-5xl lg:mt-12 xl:max-w-6xl">
-                        <div class="w-full h-80 lg:w-1/2 lg:h-[35rem]">
+                    <div className="relative flex flex-col items-center mx-auto lg:flex-row-reverse lg:max-w-5xl lg:mt-12 xl:max-w-6xl">
+                        <div className="w-full h-80 lg:w-1/2 lg:h-[35rem]">
                             <img
-                                class="h-full w-full object-cover rounded-lg"
+                                className="h-full w-full object-cover rounded-lg"
                                 src="/img/shop.jpg"
                                 alt="Winding mountain road"
                             />
                         </div>
 
-                        <div class="max-w-lg bg-white rounded-xl md:max-w-2xl md:z-10 md:shadow-lg md:absolute md:top-0 md:mt-48 lg:w-3/5 lg:left-0 lg:mt-20 lg:ml-20 xl:mt-24 xl:ml-12">
-                            <div class="flex flex-col p-12 md:px-16">
-                                <h2 class="text-2xl font-medium uppercase text-hijau1 lg:text-4xl">
+                        <div className="max-w-lg bg-white rounded-xl md:max-w-2xl md:z-10 md:shadow-lg md:absolute md:top-0 md:mt-48 lg:w-3/5 lg:left-0 lg:mt-20 lg:ml-20 xl:mt-24 xl:ml-12">
+                            <div className="flex flex-col p-12 md:px-16">
+                                <h2 className="text-2xl font-medium uppercase text-hijau1 lg:text-4xl">
                                     Marketplace
                                 </h2>
-                                <p class="mt-4">
+                                <p className="mt-4">
                                     Easy Catch tidak hanya menyediakan kemudahan
                                     dalam berbelanja, tetapi juga memberikan
                                     kenyamanan dalam setiap langkah transaksi.
@@ -186,7 +222,7 @@ const Home = () => {
                                     pembayaran melalui dompet digital.
                                 </p>
 
-                                <div class="mt-8">
+                                <div className="mt-8">
                                     <a
                                         href="/shop"
                                         className="inline-flex justify-center items-center py-3 px-5 me-3 md:me-0 text-base font-medium text-center text-white rounded-full bg-hijau1 hover:bg-hijau3 focus:ring-4 focus:ring-blue-300"
@@ -256,15 +292,15 @@ const Home = () => {
                                         </h2>
                                         <a
                                             className="text-red-500 leading-relaxed text-sm"
-                                            href="mailto:osissmandupa02@gmail.com"
+                                            href="mailto:easycatch.id@gmail.com"
                                         >
-                                            osissmandupa02@gmail.com
+                                            easycatch.id@gmail.com
                                         </a>
                                         <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">
                                             PHONE
                                         </h2>
                                         <p className="leading-relaxed text-sm">
-                                            (0756) 25617
+                                            +6281378940155
                                         </p>
                                     </div>
                                 </div>
@@ -279,36 +315,108 @@ const Home = () => {
                                     Kirimkan pesan pada kami, kami akan merespon
                                     pesan anda.
                                 </p>
-                                <div className="relative mb-4">
-                                    <label
-                                        htmlFor="name"
-                                        className="leading-7 text-sm text-gray-600"
+                                {props.flash.message && (
+                                    <div
+                                        className="p-4 my-4 text-sm text-green-800 rounded-lg bg-green-100 "
+                                        role="alert"
                                     >
-                                        Nama Anda
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="name"
-                                        name="name"
-                                        className="w-full bg-white rounded border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 text-base outline-none text-gray-700 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                    />
-                                </div>
-                                <div className="relative mb-4">
-                                    <label
-                                        htmlFor="message"
-                                        className="leading-7 text-sm text-gray-600"
+                                        <svg
+                                            className="flex-shrink-0 inline w-4 h-4 me-3"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="currentColor"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                                        </svg>
+                                        <span className="font-bold">
+                                            {props.flash.message}
+                                        </span>
+                                    </div>
+                                )}
+                                {Object.keys(props.errors).length > 0 && (
+                                    <div
+                                        className="flex p-4 my-4 text-sm text-red-800 rounded-lg bg-red-100"
+                                        role="alert"
                                     >
-                                        Pesan Anda
-                                    </label>
-                                    <textarea
-                                        id="message"
-                                        name="message"
-                                        className="w-full bg-white rounded border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 h-32 text-base outline-none text-gray-700 py-2 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-                                    ></textarea>
-                                </div>
-                                <button className="text-white bg-teal-500 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg">
-                                    Kirim
-                                </button>
+                                        <svg
+                                            className="flex-shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="currentColor"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                                        </svg>
+                                        <div>
+                                            <span className="font-medium">
+                                                Ada Kesalahan pada Formulir:
+                                            </span>
+                                            <ul className="mt-1.5 list-disc list-inside">
+                                                {Object.values(
+                                                    props.errors
+                                                ).map((error, index) => (
+                                                    <li key={index}>{error}</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                )}
+                                <form onSubmit={handleSubmit}>
+                                    <div className="relative mb-4">
+                                        <label
+                                            htmlFor="name"
+                                            className="leading-7 text-sm text-gray-600"
+                                        >
+                                            Nama Anda
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="name"
+                                            name="name"
+                                            value={form.name}
+                                            onChange={handleChange}
+                                            className="w-full bg-white rounded border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 text-base outline-none text-gray-700 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        />
+                                    </div>
+                                    <div className="relative mb-4">
+                                        <label
+                                            htmlFor="email"
+                                            className="leading-7 text-sm text-gray-600"
+                                        >
+                                            Email Anda
+                                        </label>
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            name="email"
+                                            value={form.email}
+                                            onChange={handleChange}
+                                            className="w-full bg-white rounded border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 text-base outline-none text-gray-700 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        />
+                                    </div>
+                                    <div className="relative mb-4">
+                                        <label
+                                            htmlFor="message"
+                                            className="leading-7 text-sm text-gray-600"
+                                        >
+                                            Pesan Anda
+                                        </label>
+                                        <textarea
+                                            id="message"
+                                            name="message"
+                                            value={form.message}
+                                            onChange={handleChange}
+                                            className="w-full bg-white rounded border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 h-32 text-base outline-none text-gray-700 py-2 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                                        ></textarea>
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        className="text-white bg-teal-500 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg"
+                                    >
+                                        Kirim
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>

@@ -49,8 +49,7 @@ const Store = () => {
             console.log(pair[0] + ": " + pair[1]);
         }
 
-        post(`/shop/toko/${data.id}`, {
-            data: formData,
+        post(`/shop/toko/${data.id}`, formData, {
             onSuccess: () => {
                 reset();
             },
@@ -81,20 +80,17 @@ const Store = () => {
         link.click();
     };
 
-    const handleFileChange = (e, index) => {
+    const handleFileChange = (e) => {
         const file = e.target.files[0];
-        if (!file) return;
-
-        setData(`foto_${index}`, file);
+        setData("foto", file);
 
         const reader = new FileReader();
         reader.onloadend = () => {
-            setFotoPreview((prev) => ({
-                ...prev,
-                [index]: reader.result,
-            }));
+            setFotoPreview(reader.result);
         };
-        reader.readAsDataURL(file);
+        if (file) {
+            reader.readAsDataURL(file);
+        }
     };
 
     return (
@@ -282,7 +278,7 @@ const Store = () => {
                     <input
                         type="file"
                         name="foto"
-                        onChange={handleFileChange} // Menangani perubahan file gambar
+                        onChange={handleFileChange}
                         className="file-input file-input-bordered file-input-accent w-full max-w-full"
                     />
                 </div>

@@ -104,7 +104,7 @@ const Search = () => {
                                                     />
                                                 </figure>
                                                 <div className="card-body">
-                                                    <div className="badge badge-outline">
+                                                    <div className="badge badge-outline py-7 md:py-0">
                                                         {item.category.nama}
                                                     </div>
                                                     <h2 className="card-title">
@@ -152,10 +152,10 @@ const Search = () => {
                                             />
                                         </figure>
                                         <div className="card-body">
-                                            <div className="badge badge-outline">
+                                            <div className="badge badge-outline py-7 md:py-0">
                                                 {item.category.nama}
                                             </div>
-                                            <h2 className="card-title">
+                                            <h2 className="card-title text-sm">
                                                 {item.nama}
                                             </h2>
                                             <div className="block md:flex justify-between items-center">

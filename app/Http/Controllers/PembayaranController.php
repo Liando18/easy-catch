@@ -9,6 +9,7 @@ use App\Models\OrderItem;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+
 class PembayaranController extends Controller
 {
 
@@ -106,14 +107,15 @@ class PembayaranController extends Controller
 
         try {
             $payment = Payment::findOrFail($id);
+            $path = $_SERVER['DOCUMENT_ROOT'] . "/img/payment/";
 
             if ($request->hasFile('bukti_pembayaran')) {
-                if ($payment->bukti_pembayaran && file_exists(public_path('img/payment/' . $payment->bukti_pembayaran))) {
-                    unlink(public_path('img/payment/' . $payment->bukti_pembayaran));
+                if ($payment->bukti_pembayaran && file_exists($path . $payment->bukti_pembayaran)) {
+                    unlink($path . $payment->bukti_pembayaran);
                 }
 
                 $fileName = time() . "_" . $request->file('bukti_pembayaran')->getClientOriginalName();
-                $request->file('bukti_pembayaran')->move(public_path('img/payment/'), $fileName);
+                $request->file('bukti_pembayaran')->move($path, $fileName);
 
                 $payment->bukti_pembayaran = $fileName;
                 $payment->status = '2';
@@ -138,14 +140,15 @@ class PembayaranController extends Controller
 
         try {
             $payment = Payment::findOrFail($id);
+            $path = $_SERVER['DOCUMENT_ROOT'] . "/img/payment/";
 
             if ($request->hasFile('bukti_pembayaran')) {
-                if ($payment->bukti_pembayaran && file_exists(public_path('img/payment/' . $payment->bukti_pembayaran))) {
-                    unlink(public_path('img/payment/' . $payment->bukti_pembayaran));
+                if ($payment->bukti_pembayaran && file_exists($path . $payment->bukti_pembayaran)) {
+                    unlink($path . $payment->bukti_pembayaran);
                 }
 
                 $fileName = time() . "_" . $request->file('bukti_pembayaran')->getClientOriginalName();
-                $request->file('bukti_pembayaran')->move(public_path('img/payment/'), $fileName);
+                $request->file('bukti_pembayaran')->move($path, $fileName);
 
                 $payment->bukti_pembayaran = $fileName;
                 $payment->status = '2';

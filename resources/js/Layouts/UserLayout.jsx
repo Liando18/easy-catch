@@ -121,6 +121,8 @@ const UserLayout = ({ children }) => {
                                                 <Link
                                                     href={route("logout")}
                                                     method="post"
+                                                    as="button"
+                                                    className="text-red-600 hover:text-red-800"
                                                 >
                                                     Logout
                                                 </Link>

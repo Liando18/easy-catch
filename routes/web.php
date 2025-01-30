@@ -8,6 +8,7 @@ use App\Http\Controllers\DataAksesController;
 use App\Http\Controllers\DataCustomerController;
 use App\Http\Controllers\DataMerchantController;
 use App\Http\Controllers\DataPengirimanController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\PembayaranController;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index']);
+Route::post('/feedback', [FeedbackController::class, 'sendFeedback']);
 
 Route::get('/shop', [ShopController::class, 'index']);
 

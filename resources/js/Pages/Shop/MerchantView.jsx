@@ -85,7 +85,7 @@ const MerchantView = () => {
                                 href={`https://wa.me/${formattedNumber}?text=${encodeURIComponent(
                                     message
                                 )}`}
-                                className="btn btn-success text-white w-full lg:w-auto flex items-center justify-center"
+                                className="btn btn-success text-white w-full lg:w-auto flex items-center justify-center h-auto py-2 md:h-0 md:py-0"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
@@ -213,7 +213,7 @@ const MerchantView = () => {
                                             Produk belum tersedia
                                         </p>
                                     ) : (
-                                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:mt-3">
+                                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:mt-3">
                                             {sortedProducts.map((item) => (
                                                 <div
                                                     key={item.id}
@@ -223,7 +223,7 @@ const MerchantView = () => {
                                                         <img
                                                             src={`/img/product/${item.foto}`}
                                                             alt="Produk"
-                                                            className="w-full h-32 md:h-48 object-cover"
+                                                            className="w-full object-cover"
                                                         />
                                                     </figure>
                                                     <div className="card-body p-4">
@@ -243,7 +243,7 @@ const MerchantView = () => {
                                                                           6
                                                                         ? "badge-warning"
                                                                         : "badge-success"
-                                                                } py-3 text-white`}
+                                                                } md:py-6 text-white`}
                                                             >
                                                                 Stok {item.stok}
                                                             </div>

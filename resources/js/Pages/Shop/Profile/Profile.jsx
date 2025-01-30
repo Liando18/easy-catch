@@ -1,6 +1,6 @@
 import UserLayout from "@/Layouts/UserLayout";
 import { useForm, usePage } from "@inertiajs/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const ProfileUser = () => {
     const { auth, title } = usePage().props;
@@ -34,6 +34,20 @@ const ProfileUser = () => {
             });
         }
     }, [auth, setData]);
+
+    const [fotoPreview, setFotoPreview] = useState(null);
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        setData("foto", file);
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setFotoPreview(reader.result);
+        };
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -281,10 +295,25 @@ const ProfileUser = () => {
                         <input
                             type="file"
                             name="foto"
-                            onChange={(e) => setData("foto", e.target.files[0])}
+                            onChange={handleFileChange}
                             className="file-input file-input-bordered file-input-accent w-full max-w-full"
                         />
                     </div>
+                    {fotoPreview && (
+                        <div className="mb-5">
+                            <label
+                                htmlFor="website-admin"
+                                className="block mb-2 text-sm font-medium text-gray-900"
+                            >
+                                Preview Foto Brand Toko Anda
+                            </label>
+                            <img
+                                src={fotoPreview}
+                                className="w-[200px] h-[200px] rounded-full"
+                                alt="Preview Foto"
+                            />
+                        </div>
+                    )}
                     <button
                         type="submit"
                         className="text-white bg-hijau1 hover:bg-hijau3 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-auto px-5 py-2.5 text-center"

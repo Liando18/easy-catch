@@ -63,14 +63,14 @@ const Footer = () => {
                             <p className="text-sm mt-1">
                                 <strong>Email:</strong>{" "}
                                 <a
-                                    href="mailto:osissmandupa02@gmail.com"
+                                    href="mailto:easycatch.id@gmail.com"
                                     className="text-teal-600 hover:text-teal-800"
                                 >
-                                    osissmandupa02@gmail.com
+                                    easycatch.id@gmail.com
                                 </a>
                             </p>
                             <p className="text-sm mt-1">
-                                <strong>Telepon:</strong> (0756) 25617
+                                <strong>Telepon:</strong> +6281378940155
                             </p>
                         </div>
                     </div>
@@ -90,33 +90,6 @@ const Footer = () => {
                             </a>
                             . All rights reserved.
                         </p>
-                        <div className="flex gap-4 mt-4 md:mt-0">
-                            {/* Social Media Icons */}
-                            <a
-                                href="#"
-                                className="text-gray-500 hover:text-teal-600"
-                            >
-                                <i className="fab fa-facebook-f"></i>
-                            </a>
-                            <a
-                                href="#"
-                                className="text-gray-500 hover:text-teal-600"
-                            >
-                                <i className="fab fa-twitter"></i>
-                            </a>
-                            <a
-                                href="#"
-                                className="text-gray-500 hover:text-teal-600"
-                            >
-                                <i className="fab fa-instagram"></i>
-                            </a>
-                            <a
-                                href="#"
-                                className="text-gray-500 hover:text-teal-600"
-                            >
-                                <i className="fab fa-youtube"></i>
-                            </a>
-                        </div>
                     </div>
                 </div>
             </footer>

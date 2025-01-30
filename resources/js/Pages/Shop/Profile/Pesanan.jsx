@@ -82,7 +82,7 @@ const Pesanan = () => {
                         </svg>
                         <span className="font-bold">
                             Paket berhasil dikonfirmasi, terimakasih telah
-                            berbelanja di toko kami.
+                            berbelanja di toko kamii.
                         </span>
                     </div>
                 )}

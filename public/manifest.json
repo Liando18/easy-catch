@@ -1,0 +1,17 @@
+{
+    "name": "Aplikasi EasyCatch",
+    "short_name": "EasyCatch",
+    "start_url": "/index.php",
+    "background_color": "#10b981",
+    "description": "Install Aplikasi Kami",
+    "display": "fullscreen",
+    "theme_color": "#10b981",
+    "icons": [
+        {
+            "src": "/img/logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
